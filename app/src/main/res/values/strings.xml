@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nama aplikasi -->
+    <string name="app_name">SPBU Receipt Printer</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="menu_buat_transaksi">Buat Transaksi</string>
+    <string name="menu_riwayat">Riwayat</string>
+    <string name="menu_pengaturan">Pengaturan</string>
+    <string name="menu_printer">Printer</string>
+    <string name="stat_transaksi">Transaksi Hari Ini</string>
+    <string name="stat_liter">Total Liter</string>
+    <string name="stat_penjualan">Total Penjualan</string>
+
+    <!-- Form Transaksi -->
+    <string name="form_title_buat">Buat Transaksi</string>
+    <string name="form_title_edit">Edit Transaksi</string>
+    <string name="label_nomor_transaksi">Nomor Transaksi</string>
+    <string name="label_tanggal">Tanggal</string>
+    <string name="label_jam">Jam</string>
+    <string name="label_shift">Shift</string>
+    <string name="label_operator">Operator</string>
+    <string name="label_pembayaran">Jenis Pembayaran</string>
+    <string name="label_nomor_plat">Nomor Plat</string>
+    <string name="label_produk">Jenis Produk BBM</string>
+    <string name="label_harga_liter">Harga per Liter (Rp)</string>
+    <string name="label_volume">Volume (Liter)</string>
+    <string name="label_total">Total Harga (Rp)</string>
+    <string name="btn_waktu_sekarang">Gunakan Waktu Sekarang</string>
+    <string name="btn_preview_cetak">Preview &amp; Cetak</string>
+
+    <!-- Validasi -->
+    <string name="error_field_kosong">Field ini wajib diisi</string>
+    <string name="error_harus_angka">Harus berupa angka</string>
+    <string name="error_harga_nol">Harga harus lebih dari 0</string>
+    <string name="error_volume_nol">Volume harus lebih dari 0</string>
+
+    <!-- Preview -->
+    <string name="preview_title">Preview Struk</string>
+    <string name="btn_cetak">Cetak Struk</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_selesai">Selesai</string>
+    <string name="btn_share_pdf">Bagikan PDF</string>
+    <string name="btn_test_print">Test Print</string>
+
+    <!-- Riwayat -->
+    <string name="riwayat_title">Riwayat Transaksi</string>
+    <string name="search_placeholder">Cari nomor transaksi, plat, operator…</string>
+    <string name="btn_cetak_ulang">Cetak Ulang</string>
+    <string name="btn_hapus">Hapus</string>
+    <string name="konfirmasi_hapus">Hapus transaksi ini?</string>
+    <string name="btn_export_excel">Export Excel</string>
+
+    <!-- Pengaturan -->
+    <string name="pengaturan_title">Pengaturan</string>
+    <string name="label_nama_spbu">Nama SPBU</string>
+    <string name="label_nomor_spbu">Nomor SPBU</string>
+    <string name="label_alamat">Alamat SPBU</string>
+    <string name="label_footer">Footer Struk</string>
+    <string name="label_logo">Logo SPBU</string>
+    <string name="label_ukuran_font">Ukuran Font</string>
+    <string name="label_jumlah_copy">Jumlah Copy</string>
+    <string name="label_lebar_kertas">Lebar Kertas</string>
+    <string name="label_dark_mode">Dark Mode</string>
+    <string name="btn_backup">Backup Database</string>
+    <string name="btn_restore">Restore Database</string>
+    <string name="btn_simpan">Simpan</string>
+
+    <!-- Printer -->
+    <string name="printer_title">Printer Bluetooth</string>
+    <string name="printer_terhubung">Terhubung</string>
+    <string name="printer_tidak_terhubung">Tidak Terhubung</string>
+    <string name="btn_hubungkan">Hubungkan</string>
+    <string name="btn_putuskan">Putuskan</string>
+
+    <!-- Harga BBM -->
+    <string name="harga_bbm_title">Pengaturan Harga BBM</string>
+    <string name="btn_tambah_bbm">Tambah BBM</string>
+
+    <!-- Pesan umum -->
+    <string name="sukses_simpan">Berhasil disimpan</string>
+    <string name="error_gagal_simpan">Gagal menyimpan data</string>
+    <string name="sukses_hapus">Data berhasil dihapus</string>
+    <string name="sukses_backup">Backup berhasil</string>
+    <string name="sukses_restore">Restore berhasil. Restart aplikasi.</string>
+    <string name="sukses_cetak">Berhasil mencetak</string>
+    <string name="error_printer_offline">Printer tidak terhubung</string>
+    <string name="kembali">Kembali</string>
+</resources>

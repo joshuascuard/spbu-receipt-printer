@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Untuk file yang disimpan di getExternalFilesDir() -->
+    <external-files-path
+        name="external_files"
+        path="." />
+
+    <!-- Untuk file di cache -->
+    <cache-path
+        name="cache"
+        path="." />
+
+    <!-- Untuk file internal -->
+    <files-path
+        name="files"
+        path="." />
+</paths>
