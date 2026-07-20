@@ -128,7 +128,7 @@ fun PreviewScreen(
 
                     // Tombol Cetak
                     Button(
-                        onClick = { viewModel.cetak() },
+                        onClick = { viewModel.cetak(context) },
                         enabled = !uiState.isCetak && uiState.printerStatus is PrinterStatus.Connected,
                         modifier = Modifier.weight(2f),
                         colors = ButtonDefaults.buttonColors(
