@@ -1,8 +1,14 @@
 package com.spbu.receiptprinter.bluetooth
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.util.Base64
 import com.spbu.receiptprinter.data.model.Setting
 import com.spbu.receiptprinter.data.model.Transaksi
 import com.spbu.receiptprinter.util.FormatUtil
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,19 +38,43 @@ class EscPosFormatter @Inject constructor() {
      * @param setting Pengaturan SPBU
      * @param lebarKertas Lebar kertas 58 atau 80mm
      */
+    private fun logoKeBase64(context: Context, logoPath: String): String? {
+    return try {
+        val uri = Uri.parse(logoPath)
+        val stream = context.contentResolver.openInputStream(uri) ?: return null
+        val bitmap = BitmapFactory.decodeStream(stream)
+        val scaled = Bitmap.createScaledBitmap(bitmap, 200, 80, true)
+        val out = ByteArrayOutputStream()
+        scaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+        Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP)
+    } catch (e: Exception) {
+        null
+    }
+    }
+
     fun formatStruk(
-        transaksi: Transaksi,
-        setting: Setting,
-        lebarKertas: Int = 58
-    ): String {
+    transaksi: Transaksi,
+    setting: Setting,
+    lebarKertas: Int = 58,
+    context: Context? = null
+): String {
         // Karakter separator sesuai lebar kertas
         val separator = if (lebarKertas == 80) "-".repeat(48) else "-".repeat(32)
 
         return buildString {
             // ============ HEADER ============
             // Logo / Nama perusahaan besar di tengah
-            append("[C]<b><font size='big'>PERTAMINA</font></b>\n")
-            append("\n")
+            if (context != null && setting.logoPath.isNotBlank()) {
+    val base64 = logoKeBase64(context, setting.logoPath)
+    if (base64 != null) {
+        append("[C]<img>$base64</img>\n")
+    } else {
+        append("[C]<b><font size='big'>PERTAMINA</font></b>\n")
+    }
+} else {
+    append("[C]<b><font size='big'>PERTAMINA</font></b>\n")
+}
+append("\n")
 
             // Nomor SPBU
             if (setting.nomorSpbu.isNotBlank()) {
