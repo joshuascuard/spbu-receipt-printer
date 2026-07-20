@@ -1,8 +1,9 @@
 name: Build APK
+
 on:
   push:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches: [ main ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,16 +13,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
-      - name: Grant execute permission
-        run: chmod +x gradlew
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
-        env:
-          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: SPBU-Receipt-Printer-APK
+          name: app-debug
           path: app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 30
