@@ -40,10 +40,19 @@ class EscPosFormatter @Inject constructor() {
      */
     private fun logoKeBase64(context: Context, logoPath: String): String? {
     return try {
-        val uri = Uri.parse(logoPath)
-        val stream = context.contentResolver.openInputStream(uri) ?: return null
+        // Coba dari assets dulu
+        val stream = try {
+            context.assets.open("Logo-Pertamina.png")
+        } catch (e: Exception) {
+            // Fallback ke URI dari storage
+            if (logoPath.isNotBlank()) {
+                val uri = Uri.parse(logoPath)
+                context.contentResolver.openInputStream(uri)
+            } else null
+        } ?: return null
+
         val bitmap = BitmapFactory.decodeStream(stream)
-        val scaled = Bitmap.createScaledBitmap(bitmap, 200, 80, true)
+        val scaled = Bitmap.createScaledBitmap(bitmap, 384, 100, true)
         val out = ByteArrayOutputStream()
         scaled.compress(Bitmap.CompressFormat.PNG, 100, out)
         Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP)
@@ -64,11 +73,10 @@ class EscPosFormatter @Inject constructor() {
         return buildString {
             // ============ HEADER ============
             // Logo / Nama perusahaan besar di tengah
-            if (context != null && setting.logoPath.isNotBlank()) {
+            if (context != null) {
     val base64 = logoKeBase64(context, setting.logoPath)
     if (base64 != null) {
         append("[C]<img>$base64</img>\n")
-        append("[C]<b>PERTAMINA</b>\n")
     } else {
         append("[C]<b>PERTAMINA</b>\n")
     }
