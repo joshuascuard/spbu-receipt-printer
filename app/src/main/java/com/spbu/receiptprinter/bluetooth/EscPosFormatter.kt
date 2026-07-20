@@ -165,8 +165,6 @@ append("\n")
         }
 
         return buildString {
-            appendLine(center("PERTAMINA"))
-            appendLine()
             if (setting.nomorSpbu.isNotBlank()) appendLine(center(setting.nomorSpbu))
             appendLine(center(setting.namaSpbu))
             if (setting.alamat.isNotBlank()) {
