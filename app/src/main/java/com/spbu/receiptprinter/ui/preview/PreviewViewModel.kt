@@ -80,7 +80,7 @@ class PreviewViewModel @Inject constructor(
     }
 
     /** Cetak struk ke printer Bluetooth */
-    fun cetak() {
+    fun cetak(context: Context) {
         val state = _uiState.value
         val transaksi = state.transaksi ?: return
         val setting = state.setting ?: return
@@ -94,8 +94,8 @@ class PreviewViewModel @Inject constructor(
             _uiState.update { it.copy(isCetak = true) }
 
             val escPosText = escPosFormatter.formatStruk(
-                transaksi, setting, setting.lebarKertas
-            )
+    transaksi, setting, setting.lebarKertas, context
+)
 
             val result = bluetoothPrinterManager.print(
                 escPosText = escPosText,
