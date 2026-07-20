@@ -93,9 +93,7 @@ fun PreviewScreen(
                 // ============ PREVIEW STRUK ============
                 // Simulasi kertas thermal dengan monospace font
                 Card(
-                    modifier = Modifier
-                Card(
-    modifier = Modifier
+                modifier = Modifier
         .fillMaxWidth()
         .weight(1f),
     shape = RoundedCornerShape(8.dp),
