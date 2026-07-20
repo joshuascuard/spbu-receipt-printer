@@ -121,7 +121,7 @@ fun PreviewScreen(
                 contentDescription = "Logo Pertamina",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp)
+                    .height(100.dp)
                     .padding(vertical = 8.dp)
             )
         }
