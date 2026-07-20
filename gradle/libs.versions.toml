@@ -1,4 +1,5 @@
 [versions]
+material = "1.12.0"
 agp = "8.7.3"
 kotlin = "2.0.21"
 coreKtx = "1.13.1"
@@ -23,6 +24,7 @@ workManager = "2.9.1"
 splashScreen = "1.0.1"
 
 [libraries]
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 # AndroidX Core
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
