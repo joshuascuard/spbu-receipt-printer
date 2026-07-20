@@ -22,6 +22,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.spbu.receiptprinter.bluetooth.PrinterStatus
 import com.spbu.receiptprinter.ui.common.SPBUTopBar
 import com.spbu.receiptprinter.ui.common.rememberSnackbarState
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.foundation.Image
+import androidx.compose.ui.graphics.ImageBitmap
+import android.graphics.BitmapFactory
 
 @Composable
 fun PreviewScreen(
@@ -90,26 +94,49 @@ fun PreviewScreen(
                 // Simulasi kertas thermal dengan monospace font
                 Card(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState())
-                            .padding(12.dp)
-                    ) {
-                        Text(
-                            text = uiState.previewText,
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 12.sp,
-                            color = Color.Black,
-                            lineHeight = 16.sp
-                        )
-                    }
-                }
+                Card(
+    modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f),
+    shape = RoundedCornerShape(8.dp),
+    colors = CardDefaults.cardColors(containerColor = Color.White)
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Logo Pertamina dari assets
+        val logoBitmap = remember {
+            try {
+                val stream = context.assets.open("Logo-Pertamina.png")
+                BitmapFactory.decodeStream(stream).asImageBitmap()
+            } catch (e: Exception) {
+                null
+            }
+        }
+        if (logoBitmap != null) {
+            androidx.compose.foundation.Image(
+                bitmap = logoBitmap,
+                contentDescription = "Logo Pertamina",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .padding(vertical = 8.dp)
+            )
+        }
+
+        Text(
+            text = uiState.previewText,
+            fontFamily = FontFamily.Monospace,
+            fontSize = 12.sp,
+            color = Color.Black,
+            lineHeight = 16.sp
+        )
+    }
+}
 
                 // ============ TOMBOL AKSI ============
                 Row(
