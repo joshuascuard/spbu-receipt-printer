@@ -37,13 +37,9 @@ class PrinterViewModel @Inject constructor(
     private val _pairedDevices = MutableStateFlow<List<BluetoothDevice>>(emptyList())
 
     val uiState: StateFlow<PrinterUiState> = combine(
-        bluetoothPrinterManager.printerStatus,
-        settingRepository.setting,
-        _pairedDevices,
-        _isLoading,
-        _pesanInfo,
-        _pesanError
-    ) { status, setting, devices, loading, info, error ->
+        combine(bluetoothPrinterManager.printerStatus, settingRepository.setting, _pairedDevices) { status, setting, devices -> Triple(status, setting, devices) },
+        combine(_isLoading, _pesanInfo, _pesanError) { loading, info, error -> Triple(loading, info, error) }
+    ) { (status, setting, devices), (loading, info, error) ->
         PrinterUiState(
             printerStatus = status,
             pairedDevices = devices,
