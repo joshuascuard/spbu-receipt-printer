@@ -68,11 +68,12 @@ class EscPosFormatter @Inject constructor() {
     val base64 = logoKeBase64(context, setting.logoPath)
     if (base64 != null) {
         append("[C]<img>$base64</img>\n")
+        append("[C]<b>PERTAMINA</b>\n")
     } else {
-        append("[C]<b><font size='big'>PERTAMINA</font></b>\n")
+        append("[C]<b>PERTAMINA</b>\n")
     }
 } else {
-    append("[C]<b><font size='big'>PERTAMINA</font></b>\n")
+    append("[C]<b>PERTAMINA</b>\n")
 }
 append("\n")
 
@@ -122,12 +123,7 @@ append("\n")
 
             append("[C]$separator\n")
 
-            // ============ QR CODE (nomor transaksi) ============
-            append("[C]<qrcode size='15'>${transaksi.nomorTransaksi}</qrcode>\n")
-
-            // ============ BARCODE (nomor transaksi) ============
-            append("[C]<barcode type='128' height='10'>${transaksi.nomorTransaksi}</barcode>\n")
-
+            // 
             append("[C]$separator\n")
 
             // ============ FOOTER ============
