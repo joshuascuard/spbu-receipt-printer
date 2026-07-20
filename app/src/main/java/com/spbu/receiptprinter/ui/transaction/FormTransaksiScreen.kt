@@ -98,8 +98,13 @@ fun FormTransaksiScreen(
             setFormatter { String.format("%02d", it) }
         }
 
+        val separator1 = android.widget.TextView(context).apply { text = " : "; textSize = 20f }
+        val separator2 = android.widget.TextView(context).apply { text = " : "; textSize = 20f }
+
         layout.addView(pickerJam)
+        layout.addView(separator1)
         layout.addView(pickerMenit)
+        layout.addView(separator2)
         layout.addView(pickerDetik)
 
         AlertDialog.Builder(context)
