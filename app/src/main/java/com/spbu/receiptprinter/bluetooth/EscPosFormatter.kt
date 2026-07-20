@@ -123,9 +123,6 @@ append("\n")
 
             append("[C]$separator\n")
 
-            // 
-            append("[C]$separator\n")
-
             // ============ FOOTER ============
             setting.footer.split("\n").forEach { baris ->
                 if (baris.isNotBlank()) {
