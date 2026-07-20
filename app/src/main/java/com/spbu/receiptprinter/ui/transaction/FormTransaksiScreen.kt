@@ -1,5 +1,9 @@
 package com.spbu.receiptprinter.ui.transaction
 
+import android.app.AlertDialog
+import android.widget.NumberPicker
+import android.widget.LinearLayout
+import android.view.Gravity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.compose.foundation.layout.*
@@ -70,16 +74,47 @@ fun FormTransaksiScreen(
         kalender.get(Calendar.DAY_OF_MONTH)
     )
 
-    // TimePicker
-    val timePicker = TimePickerDialog(
-        context,
-        { _, jam, menit ->
-            viewModel.setJam("${jam.toString().padStart(2, '0')}:${menit.toString().padStart(2, '0')}:00")
-        },
-        kalender.get(Calendar.HOUR_OF_DAY),
-        kalender.get(Calendar.MINUTE),
-        true
-    )
+    // TimePicker dengan detik (custom dialog)
+    val showTimePicker = {
+        val layout = LinearLayout(context).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER
+            setPadding(40, 20, 40, 20)
+        }
+
+        val pickerJam = NumberPicker(context).apply {
+            minValue = 0; maxValue = 23
+            value = kalender.get(Calendar.HOUR_OF_DAY)
+            setFormatter { String.format("%02d", it) }
+        }
+        val pickerMenit = NumberPicker(context).apply {
+            minValue = 0; maxValue = 59
+            value = kalender.get(Calendar.MINUTE)
+            setFormatter { String.format("%02d", it) }
+        }
+        val pickerDetik = NumberPicker(context).apply {
+            minValue = 0; maxValue = 59
+            value = kalender.get(Calendar.SECOND)
+            setFormatter { String.format("%02d", it) }
+        }
+
+        layout.addView(pickerJam)
+        layout.addView(pickerMenit)
+        layout.addView(pickerDetik)
+
+        AlertDialog.Builder(context)
+            .setTitle("Pilih Jam")
+            .setView(layout)
+            .setPositiveButton("OK") { _, _ ->
+                viewModel.setJam(
+                    "${pickerJam.value.toString().padStart(2,'0')}:" +
+                    "${pickerMenit.value.toString().padStart(2,'0')}:" +
+                    "${pickerDetik.value.toString().padStart(2,'0')}"
+                )
+            }
+            .setNegativeButton("Batal", null)
+            .show()
+    }
 
     Scaffold(
         topBar = {
@@ -163,7 +198,7 @@ fun FormTransaksiScreen(
                     label = { Text("Jam *") },
                     readOnly = true,
                     trailingIcon = {
-                        IconButton(onClick = { timePicker.show() }) {
+                        IconButton(onClick = { showTimePicker() }) {
                             Icon(Icons.Default.AccessTime, contentDescription = "Pilih jam")
                         }
                     },
